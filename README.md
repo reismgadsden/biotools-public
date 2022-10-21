@@ -357,4 +357,5 @@ Outputs:
 ## Phylo Stats
 ### Raw Stats
 ### Graphing Functionality
+## Documentation
 ## Administrator Portal
