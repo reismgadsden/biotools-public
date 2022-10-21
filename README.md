@@ -200,7 +200,7 @@ A Python script that breaks down files that can be obtained by <a href="https://
 * Picard SAM/BAM Libraries
 
 ## Trinity
-There is a docker image for this so it might be possible to just run from that. If not I am awaiting a reply from the creator of Trinity on the exact software requirements. The software that the docker image installs can be found <a href="https://github.com/trinityrnaseq/trinityrnaseq/blob/master/Docker/Dockerfile">here</a>.
+Trinity includes a docker image so that can be used instead of installing each dependancy, as there are quite a few dependancies. This is the largest, and most expensive (resource wise) operation that will be included in this build. It seems that most requirements for other software are included in the docker image, so this might be the only software we have to install dependancies for.
 
 ## CD-HIT
 * zlib Library
@@ -231,7 +231,7 @@ This one also has a docker image if that can be done as it is easier than instal
 ## KAAS Stats
 * Python
 
-## Phylo Stas
+## Phylo Stats
 * Python
 
 ## KEGG Stats
