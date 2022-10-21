@@ -1,4 +1,6 @@
-<img src="./wwwroot/imgs/biotoolsLogo.svg" width=50% style="display: block; margin-left: auto; margin-right: auto;">
+<p align="center">
+<img src="./wwwroot/imgs/biotoolsLogo.svg" width=50%>
+</p>
 <br/>
 <br/>
 <br/>
