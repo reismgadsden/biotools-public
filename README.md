@@ -1,4 +1,4 @@
-<img src="./wwwroot/imgs/biotoolsLogo.svg" width=50%>
+<img src="./wwwroot/imgs/biotoolsLogo.svg" width=50% style="display: block; margin-left: auto; margin-right: auto;">
 
 By: Reis Mercer Gadsden\
 Current Version: v0.0b\
