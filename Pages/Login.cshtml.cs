@@ -1,9 +1,8 @@
-using static UserAuth;
-using User;
+//namespace dotnetcoresample.Pages;
 
-public class LoginModel : PageModel {
-    public bool hashMatch (string p, string c) {
-        int hash = UserAuth.hash(s);
+// public class LoginModel : PageModel {
+//     public bool hashMatch (string p, string c) {
+//         int hash = UserAuth.hash(s);
 
         
     }
