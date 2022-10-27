@@ -8,17 +8,17 @@ public class LoginModel : PageModel {
         
     }
 
-    public LoginModel(string user, string pass) {
-        User user = new User();
+    // public LoginModel(string user, string pass) {
+    //     User user = new User();
         
-        StreamReader r = new StreamReader("Shared/whitelist.json");
-        string json = r.ReadToEnd();
-        JsonTextReader whitelist = new JsonTextReader(new StringReader(json));
+    //     StreamReader r = new StreamReader("Shared/whitelist.json");
+    //     string json = r.ReadToEnd();
+    //     JsonTextReader whitelist = new JsonTextReader(new StringReader(json));
 
-        bool found = false;
+    //     bool found = false;
 
-        while (whitelist.Read()) {
-            if (    )
-        }
-    }
+    //     while (whitelist.Read()) {
+    //         if (    )
+    //     }
+    // }
 }
