@@ -1,0 +1,11 @@
+"Users": {
+    "biotools_admin" : {
+        "role": "admin",
+        "containers": ["*"],
+        "email": "biotools-admin@gmail.com",
+        "hashword": "",
+        "token": "",
+        "last": ""
+
+    }
+}
