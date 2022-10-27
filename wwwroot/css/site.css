@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+p.quote {
+  font-size: 1.5rem;
+  font-style: italic;
+}
