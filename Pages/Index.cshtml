@@ -10,5 +10,11 @@
     <p class="quote">"Biotools aims to remove the prerequisite of knowledge of bash and the command line needed to use many of the tools available for RNA sequence analysis. Biotools will allow users to store their files on a web server and pass them through various tools. These tools include FastQC, Trinity, CD-HIT, and Salmon. Biotools will also include functional and taxonomic annotation functionality via KEGG and PhyloDB. It will also include various downstream analysis functions such as Pheatmap, KEGG Pathview, KAAS analysis, KEGG analysis, PhyloDB analysis, and many of the functionalities found within the DESeq2 R package. The goal of Biotools is to make RNA Sequencing workflow more accessible to biologists who lack knowledge of Computer Science concepts relevant to RNA Sequencing and bioinformatics."</p>
     <p>Deployed from <a href="https://github.com/reismgadsden/biotools">Github</a> using <a href="https://docs.microsoft.com/aspnet/core">ASP.NET Core</a>.</p>
     <hr />
-    <div>Host operating system: @Model.OSVersion</div>
+    <a class="login" asp-page="/Error">
+        <div class="login-button">
+            <div class="login-button-cell">
+                <p>Login</p>
+            </div>
+        </div>
+    </a>
 </div>
