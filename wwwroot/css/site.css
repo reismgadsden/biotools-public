@@ -24,13 +24,13 @@ p.quote {
 
 .login-button {
   height: 2.5rem;
-  width: 15rem;
+  width: 20rem;
   background-color: green;
   border-radius: 15px;
   padding: 15px;
+  padding-bottom: 0px;
   border: 2px solid silver;
   margin: auto;
-  text-align: center;
   display: table;
   overflow: hidden;
   font-size: 1.5rem;
@@ -45,7 +45,11 @@ p.quote {
   vertical-align: middle;
 }
 
-.login {
+a.login {
+  display: block;
+  margin: auto;
+  text-align: center;
+  width: 20rem;
   color: white;
   text-decoration: none;
 }
