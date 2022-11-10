@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace dotnetcoresample.Pages;
@@ -15,7 +17,22 @@ public class LoginModel : PageModel {
 
     public bool userFail { get; set; } = false;
 
-    public void validateLogin() {
+    public byte[] GetHash() {
+        if (password == null) return Array.Empty<byte>();
+        using (HashAlgorithm alg = SHA256.Create())
+            return alg.ComputeHash(Encoding.UTF8.GetBytes(password));
+    }
+
+    public String hashPass() {
+        if (password == null) return "";
+
+        StringBuilder sb = new StringBuilder();
+        foreach (byte b in GetHash()) sb.Append(b.ToString("X2"));
+
+        return sb.ToString();
+    }
+
+    public void validateLogin(string hashPass) {
         RedirectToPage("./Login", new {userFail = false, passFail = false});
     }
 
@@ -38,8 +55,9 @@ public class LoginModel : PageModel {
             return RedirectToPage("./Login", new {user = !userFailed, pass = !passFailed});
         }
 
-        //this.validateLogin();
-        return RedirectToPage("./Login", new {userFail = userFailed, passFail = passFailed});
+        string hashedPass = this.hashPass();
+        return RedirectToPage("./Error", new {additionalError = hashedPass});
+        //return RedirectToPage("./Login", new {userFail = userFailed, passFail = passFailed});
         // TODO: go to next page
 
     }
