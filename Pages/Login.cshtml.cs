@@ -16,7 +16,7 @@ public class LoginModel : PageModel {
     public bool userFail { get; set; } = false;
 
     public void validateLogin() {
-        
+        RedirectToPage("./Login", new {userFail = false, passFail = false});
     }
 
     public void OnGet(bool user, bool pass) {
@@ -34,12 +34,12 @@ public class LoginModel : PageModel {
         password = Request.Form["password"];
         bool passFailed = passRegex.IsMatch(password);
 
-        if (userFailed || passFailed) {
-            return RedirectToPage("./Login", new {userFail = userFailed, passFail = passFailed});
+        if (!userFailed || !passFailed) {
+            return RedirectToPage("./Login", new {user = !userFailed, pass = !passFailed});
         }
 
-        this.validateLogin();
-
+        //this.validateLogin();
+        return RedirectToPage("./Login", new {userFail = userFailed, passFail = passFailed});
         // TODO: go to next page
 
     }

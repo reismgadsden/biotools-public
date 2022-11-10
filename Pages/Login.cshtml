@@ -24,11 +24,6 @@
     <form method="post">
         @Html.TextBoxFor(model => model.username, new {@class = "form-control", placeholder = "Username", size = 50})
         @Html.TextBoxFor(model => model.password, new {@class = "form-control", placeholder = "Password", size = 50})
-        <input type="submit">
+        <input type="submit" class="login-submit" value="Login">
     </form>
-    <div class="login-button">
-            <div class="login-button-cell">
-                <p>Login</p>
-            </div>
-        </div>
 </div>

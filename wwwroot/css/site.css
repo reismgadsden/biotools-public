@@ -61,3 +61,18 @@ a.login {
   margin-left: auto;
   margin-right: auto;
 }
+
+.login-submit {
+  height: 3rem;
+  width: 20rem;
+  background-color: green;
+  border-radius: 15px;
+  border: 2px solid silver;
+  margin: auto;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.login-submit:hover {
+  background-color: darkgreen;
+}
