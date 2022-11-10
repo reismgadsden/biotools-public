@@ -40,7 +40,7 @@ p.quote {
   background-color: darkgreen;
 }
 
-.login-cell {
+.login-button-cell {
   display: table-cell;
   vertical-align: middle;
 }
@@ -52,4 +52,12 @@ a.login {
   width: 20rem;
   color: white;
   text-decoration: none;
+}
+
+.form-control {
+  border-radius: 15px;
+  width: 40%;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
