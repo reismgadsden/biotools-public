@@ -63,8 +63,8 @@ a.login {
 }
 
 .login-submit {
-  height: 3rem;
-  width: 20rem;
+  height: 2.375rem;
+  width: 40%;
   background-color: green;
   border-radius: 15px;
   border: 2px solid silver;
@@ -74,5 +74,15 @@ a.login {
 }
 
 .login-submit:hover {
+  background-color: darkgreen;
+}
+
+.logout {
+  background-color: green;
+  border-radius: 10px;
+  color: white;
+}
+
+.logout:hover {
   background-color: darkgreen;
 }

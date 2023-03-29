@@ -3,12 +3,43 @@
 @{
     ViewData["Title"] = "About";
 }
-<h1>@ViewData["Title"]</h1>
 
-<hr/>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index", style="font-family: 'Times New Roman', Times, serif; font-size: 1.4rem">Bio<span style="color: #FFCC00">tools</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
 
-<p>
-Biotools is a service that provides web wrappers for many tools used in bioinformatics, such as Trintity, Salmon, DeSeq2, and others.
-These tools are often used in Transcriptome/Genome reassembly and downstream analysis of the reassembly.
-Biotools aims to remove the need for understanding the command line, Python and R, in order to give a wider audience of biologists access to these tools.
-</p>
+    <h1>@ViewData["Title"]</h1>
+
+    <hr/>
+
+    <p>
+    Biotools is a service that provides web wrappers for many tools used in bioinformatics, such as Trintity, Salmon, DeSeq2, and others.
+    These tools are often used in Transcriptome/Genome reassembly and downstream analysis of the reassembly.
+    Biotools aims to remove the need for understanding the command line, Python and R, in order to give a wider audience of biologists access to these tools.
+    </p>
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2022 - Biotools - <a asp-area="" asp-page="/About">About</a>
+    </div>
+</footer>

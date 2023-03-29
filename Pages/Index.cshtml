@@ -4,16 +4,45 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <img src="~/imgs/biotoolsLogo.svg" alt="Biotools" height="40%" width="40%" style="padding-bottom: 75px">
-    <p class="quote">"Biotools aims to remove the prerequisite of knowledge of bash and the command line needed to use many of the tools available for RNA sequence analysis. Biotools will allow users to store their files on a web server and pass them through various tools. These tools include FastQC, Trinity, CD-HIT, and Salmon. Biotools will also include functional and taxonomic annotation functionality via KEGG and PhyloDB. It will also include various downstream analysis functions such as Pheatmap, KEGG Pathview, KAAS analysis, KEGG analysis, PhyloDB analysis, and many of the functionalities found within the DESeq2 R package. The goal of Biotools is to make RNA Sequencing workflow more accessible to biologists who lack knowledge of Computer Science concepts relevant to RNA Sequencing and bioinformatics."</p>
-    <p>Deployed from <a href="https://github.com/reismgadsden/biotools">Github</a> using <a href="https://docs.microsoft.com/aspnet/core">ASP.NET Core</a>.</p>
-    <hr />
-    <a class="login" asp-page="/Login">
-        <div class="login-button">
-            <div class="login-button-cell">
-                <p>Login to Biotools Portal</p>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index", style="font-family: 'Times New Roman', Times, serif; font-size: 1.4rem">Bio<span style="color: #FFCC00">tools</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </a>
+    </nav>
+</header>
+<div class="container">
+    <div class="text-center">
+        <img src="~/imgs/biotoolsLogo.svg" alt="Biotools" height="40%" width="40%" style="padding-bottom: 75px">
+        <p class="quote">"Biotools aims to remove the prerequisite of knowledge of bash and the command line needed to use many of the tools available for RNA sequence analysis. Biotools will allow users to store their files on a web server and pass them through various tools. These tools include FastQC, Trinity, CD-HIT, and Salmon. Biotools will also include functional and taxonomic annotation functionality via KEGG and PhyloDB. It will also include various downstream analysis functions such as Pheatmap, KEGG Pathview, KAAS analysis, KEGG analysis, PhyloDB analysis, and many of the functionalities found within the DESeq2 R package. The goal of Biotools is to make RNA Sequencing workflow more accessible to biologists who lack knowledge of Computer Science concepts relevant to RNA Sequencing and bioinformatics."</p>
+        <p>Deployed from <a href="https://github.com/reismgadsden/biotools">Github</a> using <a href="https://docs.microsoft.com/aspnet/core">ASP.NET Core</a>.</p>
+        <hr />
+        <a class="login" asp-page="/Login">
+            <div class="login-button">
+                <div class="login-button-cell">
+                    <p>Login to Biotools Portal</p>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2022 - Biotools - <a asp-area="" asp-page="/About">About</a>
+    </div>
+</footer>

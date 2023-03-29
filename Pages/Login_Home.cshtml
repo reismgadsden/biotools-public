@@ -1,0 +1,71 @@
+@page
+@model Login_HomeModel
+@{      
+    ViewData["Title"] = "Home - " + @Model.username;
+}
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Login_Home?user=@Model.username", style="font-family: 'Times New Roman', Times, serif; font-size: 1.4rem">Bio<span style="color: #FFCC00">tools</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Login_Home?user=@Model.username">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/File_Explorer">File Explorer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/FastQC">Quality Control</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=>Assembly</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" asp-page="/Trinity">Trinity</a></li>
+                            <li><a class="dropdown-item" asp-page="/Salmon">Salmon</a></li>
+                            <li><a class="dropdown-item" asp-page="/CDHIT">CD-HIT</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=>Annotation</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" asp-page="/KEGG">KEGG</a></li>
+                            <li><a class="dropdown-item" asp-page="/Phylo">PhyloDB</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=>Downstream Analysis</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" asp-page="/DESeq2">DESeq2</a></li>
+                            <li><a class="dropdown-item" asp-page="/Pheatmap">Pheatmap</a></li>
+                            <li><a class="dropdown-item" asp-page="/KEGGStats">KEGG Stats</a></li>
+                            <li><a class="dropdown-item" asp-page="/PhyloStats">PhyloDB Stats</a></li>
+                            <li><a class="dropdown-item" asp-page="/KAASStats">KAAS Stats</a></li>
+                        </ul>
+                    </li>
+                    @if (String.Equals(Model.username, "biotoolsadmin")) {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/AdminPortal">Admin Portal</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <div class="logout">
+                            <a class="nav-link" asp-area="" asp-page="/Index" style="color: white;">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+
+    <div class="center">
+        <h1>You made it, @Model.username :)!</h1>
+    </div>
+</div>

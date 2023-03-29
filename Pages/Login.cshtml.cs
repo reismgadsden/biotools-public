@@ -54,9 +54,9 @@ public class LoginModel : PageModel {
         if (!userFailed || !passFailed) {
             return RedirectToPage("./Login", new {user = !userFailed, pass = !passFailed});
         }
-
+        
         string hashedPass = this.hashPass();
-        return RedirectToPage("./Error", new {additionalError = hashedPass});
+        return RedirectToPage("./Login_Home", new {user = username});
         //return RedirectToPage("./Login", new {userFail = userFailed, passFail = passFailed});
         // TODO: go to next page
 

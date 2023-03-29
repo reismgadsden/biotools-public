@@ -9,21 +9,51 @@
                 })
 </script>
 
-<div class="text-center">
-    <img src="~/imgs/biotoolsSansText.svg" alt="Biotools" height="25%" width="25%">
-    <h1 style="padding-bottom: 50px">Login to Biotools</h1>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index", style="font-family: 'Times New Roman', Times, serif; font-size: 1.4rem">Bio<span style="color: #FFCC00">tools</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
 
-    @if (Model.userFail) {
-        <p style="color: red;">Username was not correctly formatted or was incorrect.</p>
-    }
+    <div class="text-center">
+        <img src="~/imgs/biotoolsSansText.svg" alt="Biotools" height="25%" width="25%">
+        <h1 style="padding-bottom: 50px">Login to Biotools</h1>
 
-    @if (Model.passFail) {
-        <p style="color: red;">Password was not correctly formatted or was incorrect.</p>
-    }
+        @if (Model.userFail) {
+            <p style="color: red;">Username was not correctly formatted or was incorrect.</p>
+        }
 
-    <form method="post">
-        @Html.TextBoxFor(model => model.username, new {@class = "form-control", placeholder = "Username", size = 50})
-        @Html.PasswordFor(model => model.password, new {@class = "form-control", placeholder = "Password", size = 50})
-        <input type="submit" class="login-submit" value="Login">
-    </form>
+        @if (Model.passFail) {
+            <p style="color: red;">Password was not correctly formatted or was incorrect.</p>
+        }
+
+        <form method="post">
+            @Html.TextBoxFor(model => model.username, new {@class = "form-control", placeholder = "Username", size = 50})
+            @Html.PasswordFor(model => model.password, new {@class = "form-control", placeholder = "Password", size = 50})
+            <input type="submit" class="login-submit" value="Login">
+        </form>
+    </div>
 </div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2022 - Biotools - <a asp-area="" asp-page="/About">About</a>
+    </div>
+</footer>
