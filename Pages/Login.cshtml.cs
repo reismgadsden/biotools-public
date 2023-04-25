@@ -41,6 +41,28 @@ public class LoginModel : PageModel {
         passFail = pass;
     }
 
+    public bool CheckSQL(string user, string hashPass) {
+        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        builder.ConnectionString = "";
+
+        using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+            connection.Open();
+
+            // need to add logic to prevent sql injections
+            String sql = "SELECT UserID, HashedPass FROM dbo.WHITELIST WHERE UserID='" + user + "'";
+
+            using (SqlCommand command = new SqlCommand(sql, connection)) {
+                using (SqlDataReader reader = command.ExecuteReader()) {
+                    while (reader.Read()) {
+                        if (hashPass == reader.GetString(1)) return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     public ActionResult OnPost() {
 
         Regex userRegex = new Regex("^[a-zA-Z0-9]+$");
