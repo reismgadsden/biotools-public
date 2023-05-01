@@ -90,8 +90,8 @@ public class TrinityModel : PageModel {
 
         string email = EmailFromSQL(usern);
 
-        // Thread t = new Thread(() => RunTrinty(radio, l_reads, r_reads, out_dir, usern, email));
-        // t.Start();
+        Thread t = new Thread(() => RunTrinty(radio, l_reads, r_reads, out_dir, usern, email));
+        t.Start();
 
         // RunTrinty(radio, l_reads, r_reads, usern, email);
 
