@@ -52,11 +52,20 @@ a.login {
   width: 20rem;
   color: white;
   text-decoration: none;
+  padding-bottom: 15px;
 }
 
 .form-control {
   border-radius: 15px;
   width: 40%;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-control-reads {
+  border-radius: 15px;
+  width: 80%;
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
@@ -85,4 +94,103 @@ a.login {
 
 .logout:hover {
   background-color: darkgreen;
+}
+
+.explorer {
+  min-height: 480px;
+  max-height: 480px;
+  border: 1px solid #aaaaaa;
+  overflow:auto;
+  background-image: linear-gradient(#fff, #fff 50%, #ddd 50%);
+  background-size: 10px 60px;
+}
+
+.explorer-head {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px;
+  border: 1px solid #aaaaaa;
+  border-radius: 10px 10px 0px 0px;
+  overflow: hidden;
+  color: #2e2e2e;
+}
+
+.explorer-body {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px;
+  overflow: hidden;
+  color: #2e2e2e;
+}
+
+.icon {
+  height: 20px;
+}
+
+.explorer-body-row {
+  height: 30px;
+}
+
+.explorer-header {
+  height : 40px;
+  background-color: #aaaaaa;
+  color: #ffffff;
+}
+
+.explorer-foot {
+  height: 80px;
+  min-width: 100%;
+  background-color: #cccccc;
+  border: 1px solid #aaaaaa;
+  border-radius: 0px 0px 10px 10px;
+  text-align: right;
+}
+
+.explorer-footer-button {
+  height: 40px;
+  min-width: 120px;
+  background-color: #aaaaaa;
+  color: #2e2e2e;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: 10px;
+  font-weight: bold;
+  line-height: 40px;
+  display: inline-block;
+}
+
+.add-reads {
+  height: 82px;
+  width: 100%;
+  color: #aaaaaa;
+  border: 2px dashed #aaaaaa;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 58px;
+  margin-bottom: 40px;
+}
+
+.add-reads:hover {
+  color: green;
+  border: 2px dashed green;
+}
+
+.del-reads {
+  height: 82px;
+  width: 100%;
+  color: #aaaaaa;
+  border: 2px dashed #aaaaaa;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 58px;
+  margin-bottom: 40px;
+}
+
+.del-reads:hover {
+  color: red;
+  border: 2px dashed red;
 }

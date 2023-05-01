@@ -1,7 +1,7 @@
 @page
-@model Login_HomeModel
+@model File_ExplorerModel
 @{      
-    ViewData["Title"] = "Home - " + @Model.username;
+    ViewData["Title"] = "File Explorer - " + @Model.username;
 }
 
 <header>
@@ -65,9 +65,31 @@
 </header>
 <div class="container">
 
-    <div class="text-center">
-        <img src="~/imgs/biotoolsLogo.svg" alt="Biotools" height="40%" width="40%" style="padding-bottom: 75px">
-        <p class="quote">"Biotools aims to remove the prerequisite of knowledge of bash and the command line needed to use many of the tools available for RNA sequence analysis. Biotools will allow users to store their files on a web server and pass them through various tools. These tools include FastQC, Trinity, CD-HIT, and Salmon. Biotools will also include functional and taxonomic annotation functionality via KEGG and PhyloDB. It will also include various downstream analysis functions such as Pheatmap, KEGG Pathview, KAAS analysis, KEGG analysis, PhyloDB analysis, and many of the functionalities found within the DESeq2 R package. The goal of Biotools is to make RNA Sequencing workflow more accessible to biologists who lack knowledge of Computer Science concepts relevant to RNA Sequencing and bioinformatics."</p>
-        <p><a href="https://github.com/reismgadsden/biotools-public" target="_blank">Public Github Repository</a>. Utilizing <a href="https://docs.microsoft.com/aspnet/core" target="_blank">ASP.NET Core backend</a>.</p>
+    <div class="center">
+        <table class="explorer-head">
+                <tr class = "explorer-header">
+                    <th style="width: 5%"> </th>
+                    <th style="width: 2.5%"> </th>
+                    <th style="width: 50%">Name</th>
+                    <th style="width: 20%">Last Modified</th>
+                    <th style="width: 22.5%">Size</th>
+                </tr>
+            </table>
+        <div class = "explorer">
+            <table class="explorer-body">
+                </tr>
+                <tbody class="explorer-container">
+                    @for (int i = 0; i < Model.bcis.Count; i++) {
+                        <tr class ="explorer-body-row">
+                            <td style="width: 5%"></td>
+                            <td style="width: 2.5%"><img src="~/imgs/folder-64.png" class="icon"></td>
+                            <td style="width: 50%"><a asp-page="/File_Explorer_Container" asp-route-user="@Model.username" asp-route-rel_path="~" asp-route-l_path="~" asp-route-cont="@Model.bcis[i].Name">@Model.bcis[i].Name</a></td>
+                            <td style="width: 20%">@Model.bcis[i].Properties.LastModified.ToString("g")</td>
+                            <td style="width: 22.5%">@Model.ContainerSize(Model.bcis[i].Name)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

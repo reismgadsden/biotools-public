@@ -1,7 +1,7 @@
 @page
-@model Login_HomeModel
+@model TrinityModel
 @{      
-    ViewData["Title"] = "Home - " + @Model.username;
+    ViewData["Title"] = "Trinity - " + @Model.username;
 }
 
 <header>
@@ -66,8 +66,82 @@
 <div class="container">
 
     <div class="text-center">
-        <img src="~/imgs/biotoolsLogo.svg" alt="Biotools" height="40%" width="40%" style="padding-bottom: 75px">
-        <p class="quote">"Biotools aims to remove the prerequisite of knowledge of bash and the command line needed to use many of the tools available for RNA sequence analysis. Biotools will allow users to store their files on a web server and pass them through various tools. These tools include FastQC, Trinity, CD-HIT, and Salmon. Biotools will also include functional and taxonomic annotation functionality via KEGG and PhyloDB. It will also include various downstream analysis functions such as Pheatmap, KEGG Pathview, KAAS analysis, KEGG analysis, PhyloDB analysis, and many of the functionalities found within the DESeq2 R package. The goal of Biotools is to make RNA Sequencing workflow more accessible to biologists who lack knowledge of Computer Science concepts relevant to RNA Sequencing and bioinformatics."</p>
-        <p><a href="https://github.com/reismgadsden/biotools-public" target="_blank">Public Github Repository</a>. Utilizing <a href="https://docs.microsoft.com/aspnet/core" target="_blank">ASP.NET Core backend</a>.</p>
+        <img src="https://raw.githubusercontent.com/wiki/trinityrnaseq/trinityrnaseq/images/TrinityCompositeLogo.png" style="margin-bottom: 40px;">
+        @if (Model.err != null && Model.err != "") {
+            @if (!(Model.err == "*")){
+                <p style="color: red;">@Model.err</p>
+            }
+            else {
+                <h2>Success! Your job was submitted, you will recieve an email shortly.</h2>
+            }
+        }
+        <form method="post" id="myForm">
+            <p>
+                Sequence Type:&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="fa" name="seq_type" value="fa">
+                <label for="fa">.fa (FASTA)</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="fq" name="seq_type" value="fq">
+                <label for="fq">.fq (FASTQ)</label>
+            </p>
+            <table style ="width: 100%;">
+                <tbody id="reads">
+                    <tr>
+                        <td>Left Reads:</td>
+                        <td>Right Reads:</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control-reads" name="left[]">  
+                        </td>
+                        <td>
+                            <input type="text" class="form-control-reads" name="right[]">  
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="add-reads" onclick="addField()">
+                <p><b style="font-size: 72px;">+</b></p>
+            </div>
+            <div class = "del-reads" onclick="removeField()">
+                <p><b style="font-size: 72px;">-</b></p>
+            </div>
+            <p>Output Directory (Leave blank if you would like to store at containers root)</p>
+            <input type="text" name="output" class="form-control">
+            <input type="hidden" name="user" value="@Model.username">
+        </form>
+        
+        <input type="submit" class="login-submit" value="Submit" form="myForm">
     </div>
 </div>
+<script>
+    const myForm = document.getElementById("reads");
+
+    function addField() {
+        const leftData = document.createElement("td");
+        const left = document.createElement("input");
+        left.type = "text";
+        left.name = "left[]";
+        left.classList.add("form-control-reads");
+        leftData.appendChild(left);
+
+        const rightData = document.createElement("td");
+        const right = document.createElement("input");
+        right.type = "text";
+        right.name = "right[]";
+        right.classList.add("form-control-reads");
+        rightData.appendChild(right);
+
+        const newRow = document.createElement("tr");
+        newRow.appendChild(leftData);
+        newRow.appendChild(rightData);
+
+        myForm.appendChild(newRow);
+    }
+
+    function removeField() {
+        if (myForm.childElementCount > 2) {
+            myForm.removeChild(myForm.lastElementChild);
+        }
+    }
+</script>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.Data.SqlClient;
 
 namespace dotnetcoresample.Pages;
 
@@ -49,7 +50,7 @@ public class LoginModel : PageModel {
             connection.Open();
 
             // need to add logic to prevent sql injections
-            String sql = "SELECT UserID, HashedPass FROM dbo.WHITELIST WHERE UserID='" + user + "'";
+            String sql = "";
 
             using (SqlCommand command = new SqlCommand(sql, connection)) {
                 using (SqlDataReader reader = command.ExecuteReader()) {
@@ -78,7 +79,8 @@ public class LoginModel : PageModel {
         }
         
         string hashedPass = this.hashPass();
-        return RedirectToPage("./Login_Home", new {user = username});
+        if (CheckSQL(username, hashedPass)) return RedirectToPage("./Login_Home", new {user = username});
+        else return RedirectToPage("./Login", new {user = !userFailed, pass = true});
         //return RedirectToPage("./Login", new {userFail = userFailed, passFail = passFailed});
         // TODO: go to next page
 

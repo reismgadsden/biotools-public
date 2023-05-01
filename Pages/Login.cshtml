@@ -36,7 +36,7 @@
         <img src="~/imgs/biotoolsSansText.svg" alt="Biotools" height="25%" width="25%">
         <h1 style="padding-bottom: 50px">Login to Biotools</h1>
 
-        @if (Model.userFail) {
+        @if (Model.userFail && !Model.passFail) {
             <p style="color: red;">Username was not correctly formatted or was incorrect.</p>
         }
 
@@ -47,7 +47,9 @@
         <form method="post">
             @Html.TextBoxFor(model => model.username, new {@class = "form-control", placeholder = "Username", size = 50})
             @Html.PasswordFor(model => model.password, new {@class = "form-control", placeholder = "Password", size = 50})
-            <input type="submit" class="login-submit" value="Login">
+            <div style="padding-bottom: 15px;">
+                <input type="submit" class="login-submit" value="Submit">
+            </div>
         </form>
     </div>
 </div>

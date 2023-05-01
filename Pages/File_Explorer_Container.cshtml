@@ -1,0 +1,224 @@
+@page
+@model File_Explorer_ContainerModel
+@{      
+    ViewData["Title"] = "File Explorer - " + @Model.username;
+}
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Login_Home" asp-route-user="@Model.username" style="font-family: 'Times New Roman', Times, serif; font-size: 1.4rem">Bio<span style="color: #FFCC00">tools</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Login_Home" asp-route-user="@Model.username">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/File_Explorer" asp-route-user="@Model.username">File Explorer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/FastQC">Quality Control</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=>Assembly</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" asp-page="/Trinity" asp-route-user="@Model.username">Trinity</a></li>
+                            <li><a class="dropdown-item" asp-page="/Salmon">Salmon</a></li>
+                            <li><a class="dropdown-item" asp-page="/CDHIT">CD-HIT</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=>Annotation</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" asp-page="/KEGG">KEGG</a></li>
+                            <li><a class="dropdown-item" asp-page="/Phylo">PhyloDB</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style=>Downstream Analysis</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" asp-page="/DESeq2">DESeq2</a></li>
+                            <li><a class="dropdown-item" asp-page="/Pheatmap">Pheatmap</a></li>
+                            <li><a class="dropdown-item" asp-page="/KEGGStats">KEGG Stats</a></li>
+                            <li><a class="dropdown-item" asp-page="/PhyloStats">PhyloDB Stats</a></li>
+                            <li><a class="dropdown-item" asp-page="/KAASStats">KAAS Stats</a></li>
+                        </ul>
+                    </li>
+                    @if (String.Equals(Model.username, "biotoolsadmin")) {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/AdminPortal">Admin Portal</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <div class="logout">
+                            <a class="nav-link" asp-area="" asp-page="/Index" style="color: white;">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+
+    <div class="center">
+        <table class="explorer-head">
+                <tr class = "explorer-header">
+                    <th style="width: 5%"> </th>
+                    <th style="width: 2.5%"> </th>
+                    <th style="width: 50%">Name</th>
+                    <th style="width: 20%">Last Modified</th>
+                    <th style="width: 22.5%">Size</th>
+                </tr>
+            </table>
+        <div class = "explorer">
+            <table class="explorer-body">
+                </tr>
+                <tbody class="explorer-container">
+                    <tr class="explorer-body-row">
+                        <td style="width: 5%"></td>
+                        <td style="width: 2.5%"><img src="~/imgs/folder-64.png" class="icon"></td>
+                        <td style="width: 50%">
+                            @if (Model.path == "" && Model.last_path == "~") {
+                                <a asp-page="/File_Explorer" asp-route-user="@Model.username">⮬ [..]</a>
+                            }
+                            else if (Model.path == Model.last_path) {
+                                <a asp-page="/File_Explorer_Container" asp-route-user="@Model.username" asp-route-rel_path="~", asp-route-l_path="~", asp-route-cont="@Model.container">⮬ [..]</a>
+                            }
+                            else {
+                                <a asp-page="/File_Explorer_Container" asp-route-user="@Model.username" asp-route-rel_path="@Model.last_path", asp-route-l_path="@Model.last_path.Replace('/' + Model.last_path.Split('/')[Model.last_path.Split('/').Length - 1], string.Empty)", asp-route-cont="@Model.container">⮬ [..]</a>
+                            }
+                            
+                        </td>
+                        <td style="width: 20%"> </td>
+                        <td style="width: 22.5%"> </td>
+                    </tr>
+                    @for (int i = 0; i < Model.blobs.Count; i++) {
+                        <tr class ="explorer-body-row">
+                            <td style="width: 5%; text-align: center;">
+                                @if (Model.blobs[i].Properties != null) {
+                                    <input type="radio" id="file" value="@Model.blobs[i].Name" name="action-file" onclick="updateButtons()">
+                                }
+                            </td>
+                            <td style="width: 2.5%">
+                            @switch((Model.blobs[i].Name.Split(".")[Model.blobs[i].Name.Split(".").Length - 1]).ToLower()){
+                                case "zip":
+                                case "gz":
+                                case "rar":
+                                case "tar":
+                                case "7z":
+                                    @if (Model.blobs[i].Name.Contains(".fq.gz")) {
+                                        <img src="~/imgs/dna-helix-64.png" class="icon">
+                                    }
+                                    else {
+                                        <img src="~/imgs/archive-64.png" class="icon">
+                                    }
+                                    break;
+                                case "gif":
+                                case "tiff":
+                                case "png":
+                                case "jpeg":
+                                case "jpg":
+                                    <img src="~/imgs/image-file-64.png" class="icon">
+                                    break;
+                                case "csv":
+                                case "tsv":
+                                    <img src="~/imgs/table-64.png" class="icon">
+                                    break;
+                                case "fa":
+                                case "fasta":
+                                case "fastq":
+                                case "fq":
+                                    <img src="~/imgs/dna-helix-64.png" class="icon">
+                                    break;
+                                default:
+                                    if (Model.blobs[i].Properties == null) {
+                                        <img src="~/imgs/folder-64.png" class="icon">
+                                    }
+                                    else {
+                                        <img src="~/imgs/multiline-text-64.png" class="icon">
+                                    }
+                                    break;
+                            }
+                            </td>
+                            <td style="width: 50%">
+                                @if (Model.blobs[i].Properties != null) {
+                                    @if (Model.path == "") {
+                                        @Model.blobs[i].Name;
+                                    }
+                                    else {
+                                        @Model.blobs[i].Name.Replace(Model.path + "/", string.Empty);
+                                    }
+                                }
+                                else {
+                                    @if (Model.path == "") {
+                                        <a asp-page="/File_Explorer_Container" asp-route-user="@Model.username" asp-route-rel_path="@(Model.path.Replace('/', '~'))~@(Model.blobs[i].Name)" asp-route-l_path="~", asp-route-cont="@Model.container">@Model.blobs[i].Name.Replace("/", string.Empty)</a> 
+                                    }
+                                    else {
+                                        <a asp-page="/File_Explorer_Container" asp-route-user="@Model.username" asp-route-rel_path="@(Model.path.Replace('/', '~'))~@(Model.blobs[i].Name)" asp-route-l_path="@Model.path", asp-route-cont="@Model.container">@Model.blobs[i].Name.Replace("/", string.Empty)</a> 
+                                    }
+                                }
+                            </td>
+                                @if(Model.blobs[i].Properties != null) {
+                                    <td style="width: 20%">@Model.blobs[i].Properties.LastModified?.ToString("g")</td>
+                                }
+                                else {
+                                    <td style="width: 20%">@Model.FolderDate(Model.path + "/" + Model.blobs[i].Name + "/")</td>
+                                }
+
+                                @if(Model.blobs[i].Properties != null) {
+                                    <td style="width: 22.5%">@Model.PrettySize(Model.blobs[i].Properties.ContentLength.GetValueOrDefault())</td>
+                                }
+                                else {
+                                    <td style="width: 22.5%">@Model.FolderSize(Model.path + "/" + Model.blobs[i].Name + "/")</td>
+                                }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+            <div class ="explorer-foot">
+                <div class="explorer-footer-button" id="copy">Copy Path</div>
+                <div class="explorer-footer-button" id="dl">Download</div>
+            </div>
+    </div>
+</div>
+
+<script>
+    function updateButtons() {
+        var but = document.getElementById("copy");
+        but.style.backgroundColor = "#063970";
+        but.style.color = "#FFFFFF";
+        but.style.cursor = "pointer";
+        but.onclick = function() { copyPath(); };
+
+        var dl = document.getElementById("dl");
+        dl.style.backgroundColor = "green";
+        dl.style.color = "#FFFFFF";
+        dl.style.cursor = "pointer";
+        dl.onclick = function() { download(); };
+    }
+
+    function copyPath() {
+        var sel = document.getElementsByName("action-file");
+
+        for (i = 0; i < sel.length; i++) {
+            if (sel[i].checked) navigator.clipboard.writeText(sel[i].value);
+        }
+    }
+
+    function download() {
+        var sel = document.getElementsByName("action-file");
+
+        for (i = 0; i < sel.length; i++) {
+            if (sel[i].checked){
+                window.open("https://cs710032000cb5089f5.blob.core.windows.net/@Model.container/" + sel[i].value);
+                break;
+            }
+        }
+    }
+</script>
