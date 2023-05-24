@@ -35,7 +35,9 @@
     <div class="text-center">
         <img src="~/imgs/biotoolsSansText.svg" alt="Biotools" height="25%" width="25%">
         <h1 style="padding-bottom: 50px">Login to Biotools</h1>
-
+        <!--
+            Displays error messages if the login was not succesfule
+        -->
         @if (Model.userFail && !Model.passFail) {
             <p style="color: red;">Username was not correctly formatted or was incorrect.</p>
         }
@@ -45,6 +47,9 @@
         }
 
         <form method="post">
+            <!--
+                Form control items, they dont have to be implemented this way but this was how I got it to work
+            -->
             @Html.TextBoxFor(model => model.username, new {@class = "form-control", placeholder = "Username", size = 50})
             @Html.PasswordFor(model => model.password, new {@class = "form-control", placeholder = "Password", size = 50})
             <div style="padding-bottom: 15px;">

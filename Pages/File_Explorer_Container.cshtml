@@ -83,6 +83,11 @@
                         <td style="width: 5%"></td>
                         <td style="width: 2.5%"><img src="~/imgs/folder-64.png" class="icon"></td>
                         <td style="width: 50%">
+                            @*
+                                Displays an option to point back to the last directory, we have different links because
+                                displaying the containers in a storage account and displaying blobs in a container require
+                                different methods
+                            *@
                             @if (Model.path == "" && Model.last_path == "~") {
                                 <a asp-page="/File_Explorer" asp-route-user="@Model.username">⮬ [..]</a>
                             }
@@ -97,6 +102,10 @@
                         <td style="width: 20%"> </td>
                         <td style="width: 22.5%"> </td>
                     </tr>
+                    @*
+                        Looping over each blob in the blob in the current context, we must display a radio button for each file,
+                        so that we can use our buttons on that blob
+                    *@
                     @for (int i = 0; i < Model.blobs.Count; i++) {
                         <tr class ="explorer-body-row">
                             <td style="width: 5%; text-align: center;">
@@ -105,6 +114,10 @@
                                 }
                             </td>
                             <td style="width: 2.5%">
+                            @*
+                                This infers the type of file that the blob is and displays a custom icon for it
+                            *@
+                            
                             @switch((Model.blobs[i].Name.Split(".")[Model.blobs[i].Name.Split(".").Length - 1]).ToLower()){
                                 case "zip":
                                 case "gz":
@@ -146,6 +159,9 @@
                             }
                             </td>
                             <td style="width: 50%">
+                                @*
+                                    This handles the printing of the file name and alterating its full path name to only be within current context
+                                *@
                                 @if (Model.blobs[i].Properties != null) {
                                     @if (Model.path == "") {
                                         @Model.blobs[i].Name;
@@ -154,6 +170,9 @@
                                         @Model.blobs[i].Name.Replace(Model.path + "/", string.Empty);
                                     }
                                 }
+                                @*
+                                    This renders sub-directories
+                                *@
                                 else {
                                     @if (Model.path == "") {
                                         <a asp-page="/File_Explorer_Container" asp-route-user="@Model.username" asp-route-rel_path="@(Model.path.Replace('/', '~'))~@(Model.blobs[i].Name)" asp-route-l_path="~", asp-route-cont="@Model.container">@Model.blobs[i].Name.Replace("/", string.Empty)</a> 
@@ -163,6 +182,10 @@
                                     }
                                 }
                             </td>
+                            @*
+                                This section gathers information on the blobs: last modified date, total size;
+                                Custom method was implemented for calulating the folder sizes and date
+                            *@
                                 @if(Model.blobs[i].Properties != null) {
                                     <td style="width: 20%">@Model.blobs[i].Properties.LastModified?.ToString("g")</td>
                                 }
@@ -189,6 +212,7 @@
 </div>
 
 <script>
+    // this method allows the buttons to be clickable if we have a radio button selected
     function updateButtons() {
         var but = document.getElementById("copy");
         but.style.backgroundColor = "#063970";
@@ -203,6 +227,7 @@
         dl.onclick = function() { download(); };
     }
 
+    // this method copies the full path to clipboard
     function copyPath() {
         var sel = document.getElementsByName("action-file");
 
@@ -211,6 +236,7 @@
         }
     }
 
+    // this method downloads the selected file
     function download() {
         var sel = document.getElementsByName("action-file");
 

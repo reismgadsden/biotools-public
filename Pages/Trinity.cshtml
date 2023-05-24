@@ -67,6 +67,9 @@
 
     <div class="text-center">
         <img src="https://raw.githubusercontent.com/wiki/trinityrnaseq/trinityrnaseq/images/TrinityCompositeLogo.png" style="margin-bottom: 40px;">
+        @*
+            Displays errors if any were encountered
+        *@
         @if (Model.err != null && Model.err != "") {
             @if (!(Model.err == "*")){
                 <p style="color: red;">@Model.err</p>
@@ -108,6 +111,10 @@
             </div>
             <p>Output Directory (Leave blank if you would like to store at containers root)</p>
             <input type="text" name="output" class="form-control">
+
+            @*
+                Store username in hidden form item (it gets wiped on POST)
+            *@
             <input type="hidden" name="user" value="@Model.username">
         </form>
         
@@ -115,8 +122,11 @@
     </div>
 </div>
 <script>
+
+    // holds the section we need to append or delete rows from
     const myForm = document.getElementById("reads");
 
+    // adds a new row to our left and right input reads
     function addField() {
         const leftData = document.createElement("td");
         const left = document.createElement("input");
@@ -139,6 +149,7 @@
         myForm.appendChild(newRow);
     }
 
+    // removes a row if the is greater than 1 row
     function removeField() {
         if (myForm.childElementCount > 2) {
             myForm.removeChild(myForm.lastElementChild);
